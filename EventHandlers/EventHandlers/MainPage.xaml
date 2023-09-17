@@ -6,7 +6,7 @@
     <VerticalStackLayout>
         <HorizontalStackLayout>
             <Entry x:Name="entry" Text="some text" TextChanged="entryHandle"/>
-            <Label x:Name="entryLabel" />
+            <Label x:Name="entryLabel" Text="9" />
         </HorizontalStackLayout>
         <HorizontalStackLayout>
             <Button x:Name="countButton" Text="Click me" Clicked="countButtonHandle"/>
