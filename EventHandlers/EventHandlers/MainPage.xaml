@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EventHandlers.MainPage">
+
+    <VerticalStackLayout>
+        <HorizontalStackLayout>
+            <Entry x:Name="entry" Text="some text" TextChanged="entryHandle"/>
+            <Label x:Name="entryLabel" />
+        </HorizontalStackLayout>
+        <HorizontalStackLayout>
+            <Button x:Name="countButton" Text="Click me" Clicked="countButtonHandle"/>
+            <Label x:Name="countButtonLabel" Text="0" />
+        </HorizontalStackLayout>
+        <HorizontalStackLayout>
+            <CheckBox x:Name="checkBox" CheckedChanged="checkHandle" />
+            <Label x:Name="checkBoxLabel" Text="Unchecked" />
+        </HorizontalStackLayout>
+        <HorizontalStackLayout>
+            <Switch x:Name="switchToggle" Toggled="switchToggleHandle" />
+            <Label x:Name="switchToggleLabel" Text="False" />
+        </HorizontalStackLayout>
+        <HorizontalStackLayout>
+            <Slider x:Name="sliderElement" Minimum="0" Value="0.5" Maximum="1" ValueChanged="slider_ValueChanged" WidthRequest="100" />
+            <Label x:Name="sliderLabel" Text="0.5" />
+        </HorizontalStackLayout>
+        <HorizontalStackLayout>
+            <Stepper x:Name="stepperElement" Minimum="0" Value="0.5" Maximum="1" Increment="0.1" ValueChanged="stepperElement_ValueChanged" />
+            <Label x:Name="stepperLabel" Text="0.5" />
+        </HorizontalStackLayout>
+        <HorizontalStackLayout>
+            <Picker x:Name="pickerElement" SelectedIndexChanged="pickerElement_SelectedIndexChanged">
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>Red</x:String>
+                        <x:String>Green</x:String>
+                        <x:String>Blue</x:String>
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
+            <Label x:Name="pickerLabel" Text="Red" TextColor="Red" />
+        </HorizontalStackLayout>
+    </VerticalStackLayout>
+
+</ContentPage>
