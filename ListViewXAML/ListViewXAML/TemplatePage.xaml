@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:ListViewXAML;assembly=ListViewXAML"
+             x:Class="ListViewXAML.TemplatePage">
+    <VerticalStackLayout>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Entry Grid.Row="0" Grid.Column="0" x:Name="SchoolName" Placeholder="School Name" />
+            <Entry Grid.Row="0" Grid.Column="1" x:Name="SchoolUrl" Placeholder="URL" />
+            <Picker Grid.Row="1" Grid.Column="0" x:Name="SchoolColor" />
+            <Picker Grid.Row="1" Grid.Column="1" x:Name="School2ndColor" />
+            <Button Text="Add" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Clicked="Button_Clicked" />
+        </Grid>
+        <ListView x:Name="lv" HeightRequest="200"
+                  VerticalScrollBarVisibility="Always" ItemTapped="lv_ItemTapped">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="local:School">
+                    <ViewCell>
+                        <VerticalStackLayout Padding="20" Background="{Binding School2ndColor}">
+                            <Label Text="{Binding Name}" TextColor="{Binding SchoolColor}" />
+                        </VerticalStackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <WebView HeightRequest="400" x:Name="webView" />
+    </VerticalStackLayout>
+</ContentPage>
