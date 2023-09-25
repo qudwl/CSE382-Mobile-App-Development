@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DBIntro.MainPage">
+
+    <VerticalStackLayout>
+        <Button Text="Add User" Clicked="Button_Clicked" />
+        <Entry x:Name="name" />
+        <ListView x:Name="lv" HeightRequest="100" />
+        <Entry x:Name="personName" />
+        <HorizontalStackLayout>
+            <Label Text="Date of Birth" />
+            <DatePicker x:Name="personDOB" />
+        </HorizontalStackLayout>
+        <HorizontalStackLayout>
+            <Label Text="Social Security Number" />
+            <Entry x:Name="personSSN" />
+        </HorizontalStackLayout>
+        <HorizontalStackLayout>
+            <Label Text="Income" />
+            <Entry x:Name="personIncome" Keyboard="Numeric" />
+        </HorizontalStackLayout>
+        <HorizontalStackLayout>
+        <Button Text="Add Person" Clicked="AddPerson" />
+            <Button Text="Clear Persons" Clicked="ClearPersons" />
+        </HorizontalStackLayout>
+        <ListView x:Name="personList" HeightRequest="300" />
+    </VerticalStackLayout>
+</ContentPage>
