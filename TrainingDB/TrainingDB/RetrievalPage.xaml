@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TrainingDB.RetrievalPage">
+    <VerticalStackLayout>
+        <HorizontalStackLayout>
+            <Label Text="Sport"/>
+            <Picker x:Name="sport" SelectedIndexChanged="SportSelected" WidthRequest="300">
+                <Picker.Items>
+                    <x:String>Swimming</x:String>
+                    <x:String>Biking</x:String>
+                    <x:String>Running</x:String>
+                    <x:String>Walking</x:String>
+                    <x:String>Yoga</x:String>
+                    <x:String>Strength Training</x:String>
+                </Picker.Items>
+            </Picker>
+        </HorizontalStackLayout>
+        <ListView x:Name="lvActivities">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <HorizontalStackLayout>
+                            <Label Text="{Binding DatePerformed, StringFormat='{0:MM/dd/yyyy}'}"/>
+                            <Label Text="{Binding Duration, StringFormat='{0}'}" TextColor="Red"/>
+                        </HorizontalStackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </VerticalStackLayout>
+</ContentPage>

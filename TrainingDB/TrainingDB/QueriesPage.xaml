@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TrainingDB.QueriesPage">
+    <VerticalStackLayout>
+        <Button x:Name="HrRunAll" Text="1hr Runs" Clicked="HrRunAllOnClicked"/>
+        <Button x:Name="HrRunDates" Text="1hr Run (Dates Only)" Clicked="HrRunDates_Clicked"/>
+        <Button x:Name="HrRunDateDuration" Text="1hr (Dates and Duration)" Clicked="HrRunDateDuration_Clicked"/>
+        <Button x:Name="LRunAll" Text="Long Run" Clicked="LRunAll_Clicked"/>
+        <Button x:Name="Calories" Text="500+ Calories" Clicked="Calories_Clicked"/>
+        <ListView x:Name="lv" HeightRequest="300"/>
+    </VerticalStackLayout>
+</ContentPage>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:LinqContinued;assembly=LinqContinued"
+             x:Class="LinqContinued.EnumPage">
+    <VerticalStackLayout>
+        <Button Text="Enum methods" Clicked="ButtonClicked"/>
+        <HorizontalStackLayout>
+            <Label Text="Aggregate: "/>
+            <Label x:Name="aggregate"/>
+        </HorizontalStackLayout>
+        <HorizontalStackLayout>
+            <Label Text="Average: "/>
+            <Label x:Name="average"/>
+        </HorizontalStackLayout>
+        <HorizontalStackLayout>
+            <Label Text="Max: "/>
+            <Label x:Name="max"/>
+        </HorizontalStackLayout>
+        <HorizontalStackLayout>
+            <Label Text="Count: "/>
+            <Label x:Name="count"/>
+        </HorizontalStackLayout>
+        <HorizontalStackLayout>
+            <Label Text="FirstOf: "/>
+            <Label x:Name="firstof"/>
+        </HorizontalStackLayout>
+        <HorizontalStackLayout>
+            <Label Text="LastOf: "/>
+            <Label x:Name="lastof"/>
+        </HorizontalStackLayout>
+        <HorizontalStackLayout>
+            <Label Text="Distinct and sorted: "/>
+            <ListView x:Name="distinctAndSortedLV" HeightRequest="100"/>
+        </HorizontalStackLayout>
+        <HorizontalStackLayout>
+            <Label Text="First letter F: "/>
+            <ListView x:Name="firstLetterF" HeightRequest="100">
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="local:Car">
+                        <ViewCell>
+                            <HorizontalStackLayout BackgroundColor="LightGray">
+                                <Label Text="{Binding Make}" FontSize="18"/>
+                                <Label Text="{Binding Model}"/>
+                            </HorizontalStackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </HorizontalStackLayout>
+    </VerticalStackLayout>
+</ContentPage>

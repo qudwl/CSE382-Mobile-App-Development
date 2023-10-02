@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:local="clr-namespace:LinqContinued;assembly=LinqContinued"
+             x:Class="LinqContinued.SelectionPage">
+    <VerticalStackLayout>
+        <Button Text="Q1" Clicked="Button_Clicked"/>
+        <ListView x:Name="lv1" HeightRequest="150" VerticalScrollBarVisibility="Always"
+                  BackgroundColor="LightBlue"/>
+        <ListView x:Name="lv2" HeightRequest="150" BackgroundColor="LightGreen"
+                  VerticalScrollBarVisibility="Always">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <HorizontalStackLayout>
+                            <Label Text="{Binding Item1}" FontSize="18" VerticalOptions="Center"/>
+                            <Label Text="{Binding Item2}"/>
+                        </HorizontalStackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <ListView x:Name="lv3" HeightRequest="150" VerticalScrollBarVisibility="Always">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="local:CarPair">
+                    <ViewCell>
+                        <HorizontalStackLayout BackgroundColor="LightGray">
+                            <Label Text="{Binding Make}" FontSize="18"/>
+                            <Label Text="{Binding Model}"/>
+                        </HorizontalStackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </VerticalStackLayout>
+</ContentPage>
