@@ -3,7 +3,31 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:OlympicsMauiApp;assembly=OlympicsMauiApp"
              x:Class="OlympicsMauiApp.AthletesPage">
-    <VerticalStackLayout>
-        <ListView x:Name="athletes" VerticalScrollBarVisibility="Always" HeightRequest="500"/>
-    </VerticalStackLayout>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="200" />
+            <RowDefinition Height="200" />
+            <RowDefinition Height="200" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <ListView Grid.Row="0" Grid.Column="0" x:Name="countries" VerticalScrollBarVisibility="Always" ItemSelected="countries_ItemSelected" />
+        <ListView Grid.Row="1" Grid.Column="0" x:Name="sports" VerticalScrollBarVisibility="Always" ItemSelected="sports_ItemSelected" />
+        <ListView Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" x:Name="events" VerticalScrollBarVisibility="Always" ItemSelected="events_ItemSelected" />
+        <ListView Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" x:Name="atheletes" VerticalScrollBarVisibility="Always" ItemSelected="atheletes_ItemSelected">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="local:Participant2016Summer">
+                    <ViewCell>
+                        <HorizontalStackLayout>
+                            <Image Source="{Binding MedalImage}" WidthRequest="20" MaximumHeightRequest="20" />
+                            <Label Text="{Binding Name}" TextColor="{Binding TextColor}" />
+                        </HorizontalStackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
 </ContentPage>
