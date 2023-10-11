@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Prefs.MainPage">
+
+    <VerticalStackLayout
+        Spacing="25"
+        Padding="30,0"
+        VerticalOptions="Center">
+        <HorizontalStackLayout>
+            <Switch x:Name="metricSwitch" Toggled="MetricSwitchToggled"/>
+            <Label Text="Metric"/>
+        </HorizontalStackLayout>
+        <HorizontalStackLayout>
+            <DatePicker x:Name="dobPicker" DateSelected="dobPicker_DateSelected" />
+            <Label Text="Date of Birth" />
+        </HorizontalStackLayout>
+        <HorizontalStackLayout>
+            <Slider Minimum="0" Maximum="1" WidthRequest="200" x:Name="experienceSlider" ValueChanged="experienceSlider_ValueChanged" />
+            <Label Text="Experience" />
+        </HorizontalStackLayout>
+    </VerticalStackLayout>
+</ContentPage>
