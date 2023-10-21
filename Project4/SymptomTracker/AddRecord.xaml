@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SymptomTracker.AddRecord"
+             Title="AddRecord">
+    <VerticalStackLayout Margin="10">
+        <Grid RowSpacing="10" Margin="0, 10, 0, 10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0" Grid.Column="0" Text="Date:" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" />
+            <DatePicker x:Name="datePicker" Grid.Row="0" Grid.Column="1" />
+            <Label Text="Time: " Grid.Row="1" Grid.Column="0" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" />
+            <TimePicker x:Name="timePicker" Grid.Row="1" Grid.Column="1" />
+            <Label Text="Severity: " Grid.Row="2" Grid.Column="0" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" />
+            <Picker x:Name="severityPicker" Grid.Row="2" Grid.Column="1" />
+        </Grid>
+        <Editor x:Name="noteField" />
+        <Button Text="Add" x:Name="addButton" Clicked="addButton_Clicked" />
+        <Button Text="Cancel" x:Name="cancelButton" Clicked="cancelButton_Clicked" />
+    </VerticalStackLayout>
+</ContentPage>

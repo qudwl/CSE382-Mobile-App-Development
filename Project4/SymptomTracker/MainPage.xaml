@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:SymptomTracker;assembly=SymptomTracker"
+             x:Class="SymptomTracker.MainPage">
+
+    <VerticalStackLayout VerticalOptions="Fill">
+        <Grid Margin="20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0" Text="Sorting:" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Margin="20" />
+            <HorizontalStackLayout Grid.Column="1">
+                <RadioButton Content="By Date" IsChecked="True"  />
+                <RadioButton Content="By Severity" />
+            </HorizontalStackLayout>
+        </Grid>
+        <ListView x:Name="recordsView" Margin="20">
+            <!--<ListView.ItemTemplate>
+                <DataTemplate >
+                    <ViewCell>
+                        <Label Text="{Binding note}" />
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>-->
+        </ListView>
+        <Button x:Name="addRecordButton" Text="Add" Clicked="addRecordButton_Clicked" Margin="20"/>
+        
+    </VerticalStackLayout>
+</ContentPage>
