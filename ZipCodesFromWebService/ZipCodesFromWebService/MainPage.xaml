@@ -22,19 +22,27 @@
             <Entry Grid.Row="1" Grid.Column="1" x:Name="state" />
             <Button Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Text="Look up" x:Name="search" Clicked="search_Clicked" />
             <ListView Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" x:Name="listOfZipCodes" HeightRequest="600">
-            <ListView.ItemTemplate>
-                <DataTemplate x:DataType="local:Place">
-                    <ViewCell>
-                        <HorizontalStackLayout>
-                            <Label Text="{Binding placeName}" />
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="local:Place">
+                        <ViewCell>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Column="0" Text="{Binding PlaceName}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontAttributes="Bold" TextColor="Blue" />
+                                <Label Grid.Column="1" Text="{Binding postCode}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" />
+                                <Label Grid.Column="2" Text="{Binding longitude}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" />
+                                <Label Grid.Column="3" Text="{Binding latitude}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" />
+                            </Grid>
 
-                        </HorizontalStackLayout>
+                        </ViewCell>
 
-                    </ViewCell>
+                    </DataTemplate>
 
-                </DataTemplate>
-
-            </ListView.ItemTemplate>
+                </ListView.ItemTemplate>
             </ListView>
         </Grid>
     </ScrollView>

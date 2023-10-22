@@ -19,15 +19,15 @@ namespace ZipCodesFromWebService
     public class Place
     {
         [JsonProperty("place name")]
-        public string placeName;
-        public string longitude;
-        public string latitude;
+        public string PlaceName { get; set; }
+        public string longitude { get; set; }
+        public string latitude { get; set; }
         [JsonProperty("post code")]
-        public string postCode;
+        public string postCode { get; set; }
 
         public override string ToString()
         {
-            return $"{placeName} {longitude} {latitude} {postCode}";
+            return $"{PlaceName} {longitude} {latitude} {postCode}";
         }
     }
 }
