@@ -5,7 +5,7 @@ public partial class MainPage : ContentPage {
 
     public MainPage() {
 		InitializeComponent();
-		recordsView.ItemsSource = DB.conn.Table<Record>().ToList().OrderBy(x => isBySeverity ? x.severity : x.timeOfIncident);
+        recordsView.ItemsSource = DB.conn.Table<Record>().ToList();
 	}
 
     private async void addRecordButton_Clicked(object sender, EventArgs e)

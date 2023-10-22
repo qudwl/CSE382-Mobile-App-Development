@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SymptomTracker.AddRecord"
              Title="AddRecord">
-    <VerticalStackLayout Margin="10">
+    <VerticalStackLayout Margin="10" HorizontalOptions="Fill">
         <Grid RowSpacing="10" Margin="0, 10, 0, 10">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="100" />
@@ -21,8 +21,10 @@
             <Label Text="Severity: " Grid.Row="2" Grid.Column="0" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" />
             <Picker x:Name="severityPicker" Grid.Row="2" Grid.Column="1" />
         </Grid>
-        <Editor x:Name="noteField" />
-        <Button Text="Add" x:Name="addButton" Clicked="addButton_Clicked" />
-        <Button Text="Cancel" x:Name="cancelButton" Clicked="cancelButton_Clicked" />
+        <Editor x:Name="noteField" HeightRequest="200" />
+        <VerticalStackLayout Spacing="10" Margin="0, 10, 0, 10">
+            <Button Text="Add" x:Name="addButton" Clicked="addButton_Clicked" />
+            <Button Text="Cancel" x:Name="cancelButton" Clicked="cancelButton_Clicked" />
+        </VerticalStackLayout>
     </VerticalStackLayout>
 </ContentPage>

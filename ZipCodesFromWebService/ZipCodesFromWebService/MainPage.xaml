@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:ZipCodesFromWebService"
+             x:Class="ZipCodesFromWebService.MainPage">
+
+    <ScrollView>
+        <Grid ColumnSpacing="10" RowSpacing="10" Margin="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0" Grid.Column="0" Text="City" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" />
+            <Entry Grid.Row="0" Grid.Column="1" x:Name="city" />
+            <Label Grid.Row="1" Grid.Column="0" Text="State" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" />
+            <Entry Grid.Row="1" Grid.Column="1" x:Name="state" />
+            <Button Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Text="Look up" x:Name="search" Clicked="search_Clicked" />
+            <ListView Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" x:Name="listOfZipCodes" HeightRequest="600">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="local:Place">
+                    <ViewCell>
+                        <HorizontalStackLayout>
+                            <Label Text="{Binding placeName}" />
+
+                        </HorizontalStackLayout>
+
+                    </ViewCell>
+
+                </DataTemplate>
+
+            </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+    </ScrollView>
+
+</ContentPage>
+
