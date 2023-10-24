@@ -12,20 +12,24 @@
             </Grid.ColumnDefinitions>
             <Label Grid.Column="0" Text="Sorting:" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Margin="20" />
             <HorizontalStackLayout Grid.Column="1">
-                <RadioButton Content="By Date" IsChecked="True"  />
-                <RadioButton Content="By Severity" />
+                <RadioButton x:Name="byDate" Content="By Date" Value="Date" CheckedChanged="CheckedChanged" />
+                <RadioButton x:Name="bySev" Content="By Severity" Value="Severity" CheckedChanged="CheckedChanged" />
             </HorizontalStackLayout>
         </Grid>
-        <ListView x:Name="recordsView" Margin="20">
-            <!--<ListView.ItemTemplate>
-                <DataTemplate >
+        <ListView x:Name="recordsView" Margin="20" SeparatorColor="Gray" HeightRequest="300" ItemSelected="recordsView_ItemSelected">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="local:Record" >
                     <ViewCell>
-                        <Label Text="{Binding note}" />
+                        <Grid ColumnSpacing="10" RowDefinitions="auto, auto" ColumnDefinitions="auto, auto">
+                            <Rectangle Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Fill="{Binding Color}" HeightRequest="20" WidthRequest="20" />
+                            <Label Grid.Row="0" Grid.Column="1" Text="{Binding timeOfIncident}" VerticalTextAlignment="Center" FontAttributes="Bold" TextColor="Blue" />
+                            <Label Grid.Row="1" Grid.Column="1" Text="{Binding note}" VerticalTextAlignment="Center" FontAttributes="Italic" TextColor="Gray" />
+                        </Grid>
                     </ViewCell>
                 </DataTemplate>
-            </ListView.ItemTemplate>-->
+            </ListView.ItemTemplate>
         </ListView>
         <Button x:Name="addRecordButton" Text="Add" Clicked="addRecordButton_Clicked" Margin="20"/>
-        
+
     </VerticalStackLayout>
 </ContentPage>

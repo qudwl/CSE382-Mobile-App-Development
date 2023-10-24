@@ -22,9 +22,31 @@ namespace SymptomTracker
             this.severity = severity;
         }
 
-        public Record()
+        public Record() { }
+        [Ignore]
+        public Brush Color
         {
-            
+            get
+            {
+                switch (severity)
+                {
+                    case 1:
+                    case 2:
+                    case 3:
+                        return Brush.Green;
+                    case 4:
+                    case 5:
+                    case 6:
+                    case 7:
+                        return Brush.Orange;
+                    case 8:
+                    case 9:
+                    case 10:
+                        return Brush.Red;
+                    default:
+                        return Brush.Black;
+                }
+            }
         }
 
         public override string ToString()
