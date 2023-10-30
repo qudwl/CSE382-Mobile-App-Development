@@ -45,8 +45,11 @@
                     Grid.Row="1" Grid.Column="2"
                     Command="{Binding BackspaceCommand}" />
             <Button Text="+"
-                    Grid.Row="1" Grid.Column="3" Grid.RowSpan="3"
+                    Grid.Row="1" Grid.Column="3" Grid.RowSpan="2"
                     Command="{Binding AddCommand}" />
+            <Button Text="!"
+                    Grid.Row="3" Grid.Column="3"
+                    Command="{Binding FactorialCommand}" />
             <Button Text="&#x00B1;"
                     Grid.Row="4" Grid.Column="3" Grid.RowSpan="2"
                     Command="{Binding PlusMinusCommand}" />

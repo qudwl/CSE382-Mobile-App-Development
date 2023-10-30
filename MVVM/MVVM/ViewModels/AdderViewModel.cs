@@ -91,12 +91,30 @@ public class AdderViewModel : INotifyPropertyChanged {
 				CurrentEntry = v.ToString();
 				RefreshCanExecutes();
 			});
+		FactorialCommand = new Command(
+			execute: () =>
+			{
+				int result = 1;
+				for (int i = Int32.Parse(CurrentEntry); i > 0; i--)
+				{
+					result *= i;
+				}
+
+				CurrentEntry = result.ToString();
+				RefreshCanExecutes();
+			},
+			canExecute: () =>
+			{
+				int tmp;
+				return Int32.TryParse(CurrentEntry, out tmp) && tmp >= 0;
+			});
 	}
 	void RefreshCanExecutes() {
 		((Command)BackspaceCommand).ChangeCanExecute();
 		((Command)NumericCommand).ChangeCanExecute();
 		((Command)DecimalPointCommand).ChangeCanExecute();
 		((Command)AddCommand).ChangeCanExecute();
+		((Command)FactorialCommand).ChangeCanExecute();
 	}
 	public string CurrentEntry {
 		private set { SetProperty(ref currentEntry, value); }
@@ -114,6 +132,7 @@ public class AdderViewModel : INotifyPropertyChanged {
 	public ICommand DecimalPointCommand { private set; get; }
 	public ICommand FactCommand { private set; get; }
 	public ICommand AddCommand { private set; get; }
+	public ICommand FactorialCommand { private set; get; }
 	public void SaveState(IDictionary<string, object> dictionary) {
 		dictionary["CurrentEntry"] = CurrentEntry;
 		dictionary["HistoryString"] = HistoryString;
