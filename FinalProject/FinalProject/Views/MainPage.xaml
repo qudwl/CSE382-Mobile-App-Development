@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FinalProject.Views.MainPage"
+             Title="MainPage">
+    <Grid Margin="10" RowSpacing="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="9*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <FlexLayout Grid.Row="0" JustifyContent="SpaceBetween">
+            <Button Text="Search" x:Name="searchBtn" Clicked="searchBtn_Clicked" />
+            <Button Text="Settings" x:Name="settingBtn" Clicked="settingBtn_Clicked" />
+        </FlexLayout>
+        <Label Grid.Row="1" Text="Saved Classes" />
+        <ListView Grid.Row="2" />
+        <Button Grid.Row="3" Text="Refresh" />
+    </Grid>
+</ContentPage>

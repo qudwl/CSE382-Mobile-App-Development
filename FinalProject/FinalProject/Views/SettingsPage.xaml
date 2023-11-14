@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FinalProject.Views.SettingsPage"
+             xmlns:viewModel="Final"
+             Title="SettingsPage">
+    <VerticalStackLayout Spacing="10" Margin="10">
+        <Button Text="Back" x:Name="backBtn" Clicked="backBtn_Clicked" />
+        <Label Text="Change Term" />
+        <Picker x:Name="termPicker" />
+        <Label Text="Campus" />
+        <VerticalStackLayout RadioButtonGroup.GroupName="campusRadioGroup" RadioButtonGroup.SelectedValue="o">
+            <RadioButton Content="Oxford" Value="o" />
+            <RadioButton Content="Hamilton" Value="h" />
+            <RadioButton Content="Middletown" Value="m" />
+            <RadioButton Content="Luxembourg" Value="l" />
+        </VerticalStackLayout>
+        <Button Text="Save" />
+    </VerticalStackLayout>
+</ContentPage>
