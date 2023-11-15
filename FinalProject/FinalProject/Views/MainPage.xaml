@@ -10,10 +10,6 @@
             <RowDefinition Height="9*" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <FlexLayout Grid.Row="0" JustifyContent="SpaceBetween">
-            <Button Text="Search" x:Name="searchBtn" Clicked="searchBtn_Clicked" />
-            <Button Text="Settings" x:Name="settingBtn" Clicked="settingBtn_Clicked" />
-        </FlexLayout>
         <Label Grid.Row="1" Text="Saved Classes" />
         <ListView Grid.Row="2" />
         <Button Grid.Row="3" Text="Refresh" />

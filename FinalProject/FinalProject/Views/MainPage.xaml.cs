@@ -9,7 +9,7 @@ public partial class MainPage : ContentPage
 
     void searchBtn_Clicked(System.Object sender, System.EventArgs e)
     {
-        Navigation.PushModalAsync(new SearchPage());
+        
     }
 
     void settingBtn_Clicked(System.Object sender, System.EventArgs e)

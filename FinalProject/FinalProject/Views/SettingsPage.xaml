@@ -5,7 +5,6 @@
              xmlns:viewModel="Final"
              Title="SettingsPage">
     <VerticalStackLayout Spacing="10" Margin="10">
-        <Button Text="Back" x:Name="backBtn" Clicked="backBtn_Clicked" />
         <Label Text="Change Term" />
         <Picker x:Name="termPicker" />
         <Label Text="Campus" />

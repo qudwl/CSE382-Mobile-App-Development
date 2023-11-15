@@ -146,9 +146,20 @@ public partial class SearchPage : ContentPage
         string termCode = Preferences.Get("termCode", "202310");
         api.GetCourseByDepartment(Departments[index].Value, termCode, Courses);
     }
-
-    void backBtn_Clicked(System.Object sender, System.EventArgs e)
+    async void searchList_ItemSelected(System.Object sender, Microsoft.Maui.Controls.SelectedItemChangedEventArgs e)
     {
-        Navigation.PopModalAsync();
+        Course course = (searchList.SelectedItem as Course);
+        string message = "Would you like to add " + course.SectionName + "?";
+        var addCourseAnswer = await DisplayAlert("Add Course to Favorites", message, "Yes", "No");
+
+        if (addCourseAnswer)
+        {
+            await Navigation.PopModalAsync();
+        }
+
+        else
+        {
+            searchList.SelectedItem = null;
+        }
     }
 }

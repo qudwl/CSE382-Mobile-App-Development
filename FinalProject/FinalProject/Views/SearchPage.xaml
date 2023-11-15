@@ -5,12 +5,11 @@
              x:Class="FinalProject.Views.SearchPage"
              Title="SearchPage">
     <Grid Margin="10" RowDefinitions="*,*,9*" RowSpacing="10">
-        <Button Grid.Row="0" Text="Back" x:Name="backBtn" Clicked="backBtn_Clicked" />
         <VerticalStackLayout Grid.Row="1" Spacing="10">
             <Label Text="Department" VerticalTextAlignment="Center" />
             <Picker x:Name="departmentPicker" Title="Select a Department" />
         </VerticalStackLayout>
-        <ListView Grid.Row="2" x:Name="searchList">
+        <ListView Grid.Row="2" x:Name="searchList" ItemSelected="searchList_ItemSelected">
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="local:Course">
                     <ViewCell>

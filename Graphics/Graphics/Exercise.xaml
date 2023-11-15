@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Graphics.Exercise"
+             xmlns:drawables="clr-namespace:Graphics.Drawables"
+             Title="Exercise">
+    <ContentPage.Resources>
+        <drawables:ExerciseDrawable x:Key="exerciseDrawable"/>
+    </ContentPage.Resources>
+    <VerticalStackLayout Spacing="10" Margin="10">
+        <GraphicsView Drawable="{StaticResource exerciseDrawable}" x:Name="graphics" WidthRequest="500" HeightRequest="500" />
+        <Entry x:Name="data" Text="10,20,30,10" />
+        <Entry x:Name="labels" Text="Orange,Apple,Pear,Kiwi" />
+        <Button Text="Plot" x:Name="plotBtn" Clicked="plotBtn_Clicked" />
+    </VerticalStackLayout>
+</ContentPage>
