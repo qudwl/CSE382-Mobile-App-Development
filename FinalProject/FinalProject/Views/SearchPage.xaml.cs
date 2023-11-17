@@ -154,7 +154,8 @@ public partial class SearchPage : ContentPage
 
         if (addCourseAnswer)
         {
-            await Navigation.PopModalAsync();
+            DB.conn.Insert(course);
+            await Shell.Current.GoToAsync("home");
         }
 
         else

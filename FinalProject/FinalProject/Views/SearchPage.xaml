@@ -4,7 +4,7 @@
              xmlns:local="clr-namespace:FinalProject.Models;assembly=FinalProject"
              x:Class="FinalProject.Views.SearchPage"
              Title="SearchPage">
-    <Grid Margin="10" RowDefinitions="*,*,9*" RowSpacing="10">
+    <Grid Margin="10" RowDefinitions="*,*,8*" RowSpacing="10">
         <VerticalStackLayout Grid.Row="1" Spacing="10">
             <Label Text="Department" VerticalTextAlignment="Center" />
             <Picker x:Name="departmentPicker" Title="Select a Department" />
@@ -29,10 +29,7 @@
                                 <Label Text="/" />
                                 <Label Text="{Binding MaxStudents}" />
                             </HorizontalStackLayout>
-                            <VerticalStackLayout Grid.Row="1" Grid.Column="1">
-                                
-
-                            </VerticalStackLayout>
+                            <Label Grid.Row="1" Grid.Column="1" Text="{Binding Times}" />
                         </Grid>
                     </ViewCell>
                 </DataTemplate>

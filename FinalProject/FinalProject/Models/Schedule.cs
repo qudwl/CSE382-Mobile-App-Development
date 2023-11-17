@@ -12,7 +12,7 @@ namespace FinalProject.Models
         public string BuildingName { get; set; }
         public override string ToString()
         {
-            string result = Days + " " + "StartTime" + "-" + EndTime;
+            string result = Days + " " + StartTime + "-" + EndTime;
             return result;
         }
     }

@@ -51,6 +51,14 @@ namespace FinalProject.Models
         {
 			return Title;
         }
+
+		public string Times
+		{
+			get
+			{
+				return string.Join("\n", (object[]) Schedules);
+			}
+		}
     }
 }
 

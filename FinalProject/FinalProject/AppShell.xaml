@@ -9,13 +9,16 @@
 
     <TabBar >
         <Tab Title="Home">
-            <ShellContent ContentTemplate="{DataTemplate views:MainPage}" />
+            <ShellContent ContentTemplate="{DataTemplate views:MainPage}"
+                          Route="home"/>
         </Tab>
         <Tab Title="Search">
-            <ShellContent ContentTemplate="{DataTemplate views:SearchPage}" />
+            <ShellContent ContentTemplate="{DataTemplate views:SearchPage}"
+                          Route="search"/>
         </Tab>
         <Tab Title="Settings">
-            <ShellContent ContentTemplate="{DataTemplate views:SettingsPage}" />
+            <ShellContent ContentTemplate="{DataTemplate views:SettingsPage}"
+                          Route="settings"/>
         </Tab>
     </TabBar>
 </Shell>

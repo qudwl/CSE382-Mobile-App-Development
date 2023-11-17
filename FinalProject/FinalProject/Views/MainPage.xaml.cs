@@ -6,14 +6,4 @@ public partial class MainPage : ContentPage
 	{
 		InitializeComponent();
 	}
-
-    void searchBtn_Clicked(System.Object sender, System.EventArgs e)
-    {
-        
-    }
-
-    void settingBtn_Clicked(System.Object sender, System.EventArgs e)
-    {
-        Navigation.PushModalAsync(new SettingsPage());
-    }
 }
