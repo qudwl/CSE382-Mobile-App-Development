@@ -10,12 +10,13 @@ namespace FinalProject.Models
 		public string SectionName { get; set; }
         public int Crn { get; set; }
         public string Title { get; set; }
-        public char Section { get; set; }
+        public string Section { get; set; }
         public string Instructor { get; set; }
         public string Description { get; set; }
         public double Credits { get; set; }
         public int MaxStudents { get; set; }
         public int CurrentStudents { get; set; }
+		[Ignore]
         public Schedule[] Schedules { get; set; }
 
         public Course() { }
@@ -24,7 +25,7 @@ namespace FinalProject.Models
 			string cid,
 			int crn,
 			string title,
-			char section,
+			string section,
 			string instructor,
 			string description,
 			double credits,

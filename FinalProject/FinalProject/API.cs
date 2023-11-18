@@ -63,14 +63,14 @@ namespace FinalProject
                     else instructor = data.Instructors.Where(data => data.IsPrimary)
                         .First().Person.InformalDisplayedName ?? "Faculty";
 
-                    Schedule[] schedules = parseSchedules(data.Schedules);
+                    Schedule[] schedules = parseSchedules(data.Schedules, Int32.Parse(data.Crn));
 
                     result[i] = new Course(
                         data.Course.SubjectCode,
                         data.Course.Number,
                         Int32.Parse(data.Crn),
                         data.Title,
-                        data.CourseSectionCode[0],
+                        data.CourseSectionCode,
                         instructor,
                         data.Course.Description,
                         data.CreditHour,
@@ -93,7 +93,7 @@ namespace FinalProject
                 offset++;
             } while (result.Length == 20);
         }
-        private Schedule[] parseSchedules(ScheduleData[] datas)
+        private Schedule[] parseSchedules(ScheduleData[] datas, int crn)
         {
             List<Schedule> schedules = new List<Schedule>();
 
@@ -102,6 +102,7 @@ namespace FinalProject
                 if (datas[i].ScheduleTypeCode != "FEXM")
                 {
                     Schedule schedule = new Schedule();
+                    schedule.Crn = crn;
                     schedule.StartTime = datas[i].StartTime;
                     schedule.EndTime = datas[i].EndTime;
                     schedule.BuildingName = datas[i].BuildingName;

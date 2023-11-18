@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:FinalProject.Models;assembly=FinalProject"
              x:Class="FinalProject.Views.MainPage"
              Title="MainPage">
     <Grid Margin="10" RowSpacing="10">
@@ -11,7 +12,35 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Label Grid.Row="1" Text="Saved Classes" />
-        <ListView Grid.Row="2" />
-        <Button Grid.Row="3" Text="Refresh" />
+        <ListView Grid.Row="2" x:Name="courseList">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="local:Course">
+                    <ViewCell>
+                        <Grid RowSpacing="5">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Row="0" Grid.Column="0" FontSize="Medium" Text="{Binding SectionName}" />
+                            <Label Grid.Row="1" Grid.Column="0" Text="{Binding Title}" />
+                            <HorizontalStackLayout Grid.Row="0" Grid.Column="1">
+                                <Label Text="{Binding CurrentStudents}" />
+                                <Label Text="/" />
+                                <Label Text="{Binding MaxStudents}" />
+                            </HorizontalStackLayout>
+                            <Label Grid.Row="1" Grid.Column="1" Text="{Binding Times}" />
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <HorizontalStackLayout Grid.Row="3">
+        <Button Text="Refresh" Clicked="Button_Clicked" />
+            <Button Text="Delete All" Clicked="Button_Clicked_1" />
+        </HorizontalStackLayout>
     </Grid>
 </ContentPage>

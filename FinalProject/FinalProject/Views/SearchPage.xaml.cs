@@ -155,7 +155,20 @@ public partial class SearchPage : ContentPage
         if (addCourseAnswer)
         {
             DB.conn.Insert(course);
-            await Shell.Current.GoToAsync("home");
+            foreach (var schedule in course.Schedules)
+            {
+                DB.conn.Insert(schedule);
+            }
+            var stack = Shell.Current.Navigation.NavigationStack.ToArray();
+            foreach(var page in stack)
+            {
+                if (page is MainPage)
+                {
+                    (page as MainPage).UpdateCourseList();
+                    break;
+                }
+            }
+            await Shell.Current.GoToAsync("//home");
         }
 
         else

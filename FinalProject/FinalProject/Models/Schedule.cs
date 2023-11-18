@@ -2,9 +2,10 @@
 using SQLite;
 namespace FinalProject.Models
 {
-	[Table("Schedule")]
+    [Table("Schedule")]
 	public class Schedule
 	{
+        public int Crn { get; set; }
 		public string StartTime { get; set; }
 		public string EndTime { get; set; }
         public string Days { get; set; }

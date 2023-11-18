@@ -14,6 +14,7 @@ namespace FinalProject.ViewModels
         public MainViewModel()
         {
             savedCourses = new ObservableCollection<Course>();
+            
         }
     }
 }
