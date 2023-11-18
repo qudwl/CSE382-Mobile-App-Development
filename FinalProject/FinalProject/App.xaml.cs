@@ -7,6 +7,8 @@ public partial class App : Application
 		InitializeComponent();
 
 		DB.OpenConnection();
+		if (!Preferences.ContainsKey("campus"))
+			Preferences.Set("campus", "Oxford");
 
 		MainPage = new AppShell();
 	}

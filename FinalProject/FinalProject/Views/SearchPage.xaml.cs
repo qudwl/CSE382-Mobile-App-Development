@@ -164,7 +164,7 @@ public partial class SearchPage : ContentPage
             {
                 if (page is MainPage)
                 {
-                    (page as MainPage).UpdateCourseList();
+                    Shell.Current.Navigation.RemovePage(page);
                     break;
                 }
             }

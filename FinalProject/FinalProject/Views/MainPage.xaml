@@ -38,8 +38,8 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <HorizontalStackLayout Grid.Row="3">
-        <Button Text="Refresh" Clicked="Button_Clicked" />
+        <HorizontalStackLayout Grid.Row="3" HorizontalOptions="Center">
+            <Button Text="Refresh" Clicked="Button_Clicked" />
             <Button Text="Delete All" Clicked="Button_Clicked_1" />
         </HorizontalStackLayout>
     </Grid>

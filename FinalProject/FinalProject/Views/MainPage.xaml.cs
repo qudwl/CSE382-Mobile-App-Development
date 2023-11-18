@@ -1,23 +1,29 @@
-﻿using FinalProject.Models;
+﻿using System;
+using System.Collections.ObjectModel;
+using FinalProject.Models;
 
 namespace FinalProject.Views;
 
 public partial class MainPage : ContentPage
 {
+	public ObservableCollection<Course> courses;
 	public MainPage()
 	{
 		InitializeComponent();
 		UpdateCourseList();
+		courses = new ObservableCollection<Course>();
+		courseList.ItemsSource = courses;
 	}
 
 	public void UpdateCourseList()
 	{
-		var courses = DB.conn.Table<Course>().ToList();
-		foreach (var course in courses)
+		courses.Clear();
+		var dbList = DB.conn.Table<Course>().ToList();
+		foreach (var course in dbList)
 		{
             course.Schedules = DB.conn.Table<Schedule>().Where(s => s.Crn == course.Crn).ToArray();
+			courses.Add(course);
         }
-		courseList.ItemsSource = courses;
 	}
 
     private void Button_Clicked(object sender, EventArgs e)
@@ -29,5 +35,6 @@ public partial class MainPage : ContentPage
     {
 		DB.conn.DeleteAll<Course>();
 		DB.conn.DeleteAll<Schedule>();
+		UpdateCourseList();
     }
 }
