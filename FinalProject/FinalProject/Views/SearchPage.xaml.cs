@@ -6,11 +6,7 @@ namespace FinalProject.Views;
 public partial class SearchPage : ContentPage
 {
     ObservableCollection<Course> Courses { get; set; }
-    Department[] Departments;
-    API api;
-    public SearchPage()
-    {
-        Departments = new Department[]
+    Department[] Departments = new Department[]
         {
             new Department { Value = "AA", Label = "AA - Academic Affairs" },
             new Department { Value = "AAA", Label = "AAA - Asian/Asian American Studies" },
@@ -131,7 +127,17 @@ public partial class SearchPage : ContentPage
             new Department { Value = "WGS", Label = "WGS - Women,GenderandSexuality Studies" },
             new Department { Value = "WST", Label = "WST - Western Program" }
         };
+    private bool isLoading;
+    private bool hasMore;
+    private int offset;
+    API api;
+    public SearchPage()
+    {
+        BindingContext = App.ViewModel;
         api = new API();
+        isLoading = false;
+        hasMore = true;
+        offset = 0;
         Courses = new ObservableCollection<Course>();
 
         InitializeComponent();
@@ -140,40 +146,63 @@ public partial class SearchPage : ContentPage
         departmentPicker.SelectedIndexChanged += DepartmentPicker_SelectedIndexChanged;
     }
 
-    private void DepartmentPicker_SelectedIndexChanged(object sender, EventArgs e)
+    private async void DepartmentPicker_SelectedIndexChanged(object sender, EventArgs e)
     {
+        Courses.Clear();
         int index = departmentPicker.SelectedIndex;
         string termCode = Preferences.Get("termCode", "202310");
-        api.GetCourseByDepartment(Departments[index].Value, termCode, Courses);
+        isLoading = true;
+        offset = 0;
+        var (results, doesItHaveMore) = await api.GetCourseByDepartment(Departments[index].Value, termCode, offset);
+        hasMore = doesItHaveMore;
+        foreach(var course in results)
+        {
+            Courses.Add(course);
+        }
+        isLoading = false;
     }
-    async void searchList_ItemSelected(System.Object sender, Microsoft.Maui.Controls.SelectedItemChangedEventArgs e)
+
+    async void searchList_ItemAppearing(System.Object sender, Microsoft.Maui.Controls.ItemVisibilityEventArgs e)
     {
-        Course course = (searchList.SelectedItem as Course);
-        string message = "Would you like to add " + course.SectionName + "?";
-        var addCourseAnswer = await DisplayAlert("Add Course to Favorites", message, "Yes", "No");
-
-        if (addCourseAnswer)
+        if (!isLoading && e.Item == Courses.Last() && hasMore)
         {
-            DB.conn.Insert(course);
-            foreach (var schedule in course.Schedules)
+            isLoading = true;
+            int index = departmentPicker.SelectedIndex;
+            string termCode = Preferences.Get("termCode", "202310");
+            offset++;
+            var (results, doesItHaveMore) = await api.GetCourseByDepartment(Departments[index].Value, termCode, offset);
+            foreach(var course in results)
             {
-                DB.conn.Insert(schedule);
+                Courses.Add(course);
             }
-            var stack = Shell.Current.Navigation.NavigationStack.ToArray();
-            foreach(var page in stack)
-            {
-                if (page is MainPage)
-                {
-                    Shell.Current.Navigation.RemovePage(page);
-                    break;
-                }
-            }
-            await Navigation.PushAsync(new MainPage());
+            hasMore = doesItHaveMore;
+            isLoading = false;
         }
+    }
 
-        else
-        {
-            searchList.SelectedItem = null;
-        }
+    async void searchList_ItemTapped(System.Object sender, Microsoft.Maui.Controls.ItemTappedEventArgs e)
+    {
+        Course course = (e.Item as Course);
+        Console.WriteLine(DB.conn.Table<Course>().First(item => item.Crn == course.Crn));
+        //if ( == null)
+        //{
+        //    string message = "Would you like to add " + course.SectionName + "?";
+        //    var addCourseAnswer = await DisplayAlert("Add Course to Favorites", message, "Yes", "No");
+
+        //    if (addCourseAnswer)
+        //    {
+        //        DB.conn.Insert(course);
+        //        foreach (var schedule in course.Schedules)
+        //        {
+        //            DB.conn.Insert(schedule);
+        //        }
+        //        App.ViewModel.Courses.Add(course);
+        //    }
+
+        //    else
+        //    {
+        //        searchList.SelectedItem = null;
+        //    }
+        //}
     }
 }

@@ -29,75 +29,71 @@ namespace FinalProject
 
             return tr!.terms;
         }
-        public async void GetCourseByDepartment(string departmentCode, string termCode, ObservableCollection<Course> courseList)
+        public async Task<(List<Course>, bool)> GetCourseByDepartment(string departmentCode, string termCode, int offset)
         {
-            courseList.Clear();
+            List<Course> courseList = new List<Course>();
             CourseResponse cr;
             Course[] result;
-            int offset = 0;
+            var res = await httpClient.GetAsync(
+            BASE_URL +
+            DEPARTMENT_API +
+            termCode +
+            COMPOSE_API +
+            "&course_subjectCode=" +
+            departmentCode +
+            (offset > 0 ? "&offset=" +
+            (offset * 20).ToString() : ""));
+            res.EnsureSuccessStatusCode();
 
-            do
+            string json_str = await res.Content.ReadAsStringAsync();
+
+            cr = JsonConvert.DeserializeObject<CourseResponse>(json_str);
+
+            result = new Course[cr.data.Length];
+            for (int i = 0; i < cr.data.Length; i++)
             {
-                var res = await httpClient.GetAsync(
-                BASE_URL +
-                DEPARTMENT_API +
-                termCode +
-                COMPOSE_API +
-                "&course_subjectCode=" +
-                departmentCode +
-                (offset > 0 ? "&offset=" +
-                (offset * 20).ToString() : ""));
-                res.EnsureSuccessStatusCode();
+                Data data = cr.data[i];
 
-                string json_str = await res.Content.ReadAsStringAsync();
+                string instructor;
+                if (data.Instructors.Length < 1) instructor = "Faculty";
+                else instructor = data.Instructors.Where(data => data.IsPrimary)
+                    .First().Person.InformalDisplayedName ?? "Faculty";
 
-                cr = JsonConvert.DeserializeObject<CourseResponse>(json_str);
+                Schedule[] schedules = parseSchedules(data.Schedules, Int32.Parse(data.Crn));
 
-                result = new Course[cr.data.Length];
-                for (int i = 0; i < cr.data.Length; i++)
+                result[i] = new Course(
+                    data.Course.SubjectCode,
+                    data.Course.Number,
+                    Int32.Parse(data.Crn),
+                    data.Title,
+                    data.CourseSectionCode,
+                    instructor,
+                    data.Course.Description,
+                    data.CreditHour,
+                    data.EnrollmentCount.numberOfMax,
+                    data.EnrollmentCount.numberOfCurrent,
+                    data.SectionName,
+                    schedules
+                    );
+                if (data.IsDisplayed && data.CourseSectionStatusCode == "A")
                 {
-                    Data data = cr.data[i];
-
-                    string instructor;
-                    if (data.Instructors.Length < 1) instructor = "Faculty";
-                    else instructor = data.Instructors.Where(data => data.IsPrimary)
-                        .First().Person.InformalDisplayedName ?? "Faculty";
-
-                    Schedule[] schedules = parseSchedules(data.Schedules, Int32.Parse(data.Crn));
-
-                    result[i] = new Course(
-                        data.Course.SubjectCode,
-                        data.Course.Number,
-                        Int32.Parse(data.Crn),
-                        data.Title,
-                        data.CourseSectionCode,
-                        instructor,
-                        data.Course.Description,
-                        data.CreditHour,
-                        data.EnrollmentCount.numberOfMax,
-                        data.EnrollmentCount.numberOfCurrent,
-                        data.SectionName,
-                        schedules
-                        );
-                    if (data.IsDisplayed && data.CourseSectionStatusCode == "A")
-                    {
-                        courseList.Add(result[i]);
-                        Console.WriteLine("Section Active");
-                    }
-                    else
-                    {
-                        Console.WriteLine($"{data.IsDisplayed} {data.CourseSectionStatusCode}");
-                    }
-                    Console.WriteLine(data.Course.SubjectCode + data.Course.Number);
+                    courseList.Add(result[i]);
+                    Console.WriteLine("Section Active");
                 }
-                offset++;
-            } while (result.Length == 20);
+                else
+                {
+                    Console.WriteLine($"{data.IsDisplayed} {data.CourseSectionStatusCode}");
+                }
+                Console.WriteLine(data.Course.SubjectCode + data.Course.Number);
+            }
+
+            return (courseList, result.Length == 20);
         }
         private Schedule[] parseSchedules(ScheduleData[] datas, int crn)
         {
             List<Schedule> schedules = new List<Schedule>();
 
-            for(int i = 0; i < datas.Length; i++)
+            for (int i = 0; i < datas.Length; i++)
             {
                 if (datas[i].ScheduleTypeCode != "FEXM")
                 {

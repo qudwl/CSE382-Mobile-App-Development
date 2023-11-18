@@ -12,7 +12,7 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Label Grid.Row="1" Text="Saved Classes" />
-        <ListView Grid.Row="2" x:Name="courseList">
+        <ListView Grid.Row="2" x:Name="courseList" ItemsSource="{Binding Courses}">
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="local:Course">
                     <ViewCell>
@@ -39,8 +39,8 @@
             </ListView.ItemTemplate>
         </ListView>
         <HorizontalStackLayout Grid.Row="3" HorizontalOptions="Center">
-            <Button Text="Refresh" Clicked="Button_Clicked" />
-            <Button Text="Delete All" Clicked="Button_Clicked_1" />
+            <Button Text="Refresh" x:Name="refreshBtn" />
+            <Button Text="Delete All" x:Name="deleteAllBtn" Command="{Binding DeleteAllCommand}" />
         </HorizontalStackLayout>
     </Grid>
 </ContentPage>
