@@ -168,7 +168,7 @@ public partial class SearchPage : ContentPage
                     break;
                 }
             }
-            await Shell.Current.GoToAsync("//home");
+            await Navigation.PushAsync(new MainPage());
         }
 
         else
