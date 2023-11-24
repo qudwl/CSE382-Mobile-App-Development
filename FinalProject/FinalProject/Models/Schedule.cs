@@ -5,7 +5,6 @@ namespace FinalProject.Models
     [Table("Schedule")]
 	public class Schedule
 	{
-        [PrimaryKey]
         public int Crn { get; set; }
 		public string StartTime { get; set; }
 		public string EndTime { get; set; }

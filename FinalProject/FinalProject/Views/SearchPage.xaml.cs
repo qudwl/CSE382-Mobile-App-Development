@@ -184,14 +184,14 @@ public partial class SearchPage : ContentPage
     {
         Course course = (e.Item as Course);
         var savedClasses = DB.conn.Table<Course>();
-        if (savedClasses.Count() == 0 || !savedClasses.Contains(course))
+        if (savedClasses.Count() == 0 || savedClasses.FirstOrDefault(saved => saved.Crn == course.Crn) == null)
         {
             string message = "Would you like to add " + course.SectionName + "?";
             var addCourseAnswer = await DisplayAlert("Add Course to Favorites", message, "Yes", "No");
 
             if (addCourseAnswer)
             {
-                DB.conn.Insert(course);
+                DB.conn.InsertOrReplace(course);
                 foreach (var schedule in course.Schedules)
                 {
                     DB.conn.Insert(schedule);

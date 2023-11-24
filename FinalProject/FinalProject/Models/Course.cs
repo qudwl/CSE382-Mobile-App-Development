@@ -8,7 +8,7 @@ namespace FinalProject.Models
 		public string Subject { get; set; }
 		public string Cid { get; set; }
 		public string SectionName { get; set; }
-		[PrimaryKey]
+		[PrimaryKey, Unique]
         public int Crn { get; set; }
         public string Title { get; set; }
         public string Section { get; set; }

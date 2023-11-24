@@ -9,7 +9,7 @@
             <Label Text="Department" VerticalTextAlignment="Center" />
             <Picker x:Name="departmentPicker" Title="Select a Department" />
         </VerticalStackLayout>
-        <ListView Grid.Row="2" x:Name="searchList" ItemTapped="searchList_ItemTapped" SelectionMode="None" ItemAppearing="searchList_ItemAppearing">
+        <ListView Grid.Row="2" x:Name="searchList" ItemTapped="searchList_ItemTapped" SelectionMode="None" HasUnevenRows="True" ItemAppearing="searchList_ItemAppearing">
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="local:Course">
                     <ViewCell>

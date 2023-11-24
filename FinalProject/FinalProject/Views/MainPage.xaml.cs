@@ -11,12 +11,18 @@ public partial class MainPage : ContentPage
 	{
 		InitializeComponent();
 		BindingContext = App.ViewModel;
+
+		firstLoad();
 	}
+
+	private async void firstLoad()
+	{
+        await Task.Delay(1000);
+		App.ViewModel.RefreshCourses();
+    }
 
     async void courseList_ItemTapped(System.Object sender, Microsoft.Maui.Controls.ItemTappedEventArgs e)
     {
-		Course course = (sender as Course);
-		Console.WriteLine(course.Crn);
-        await Navigation.PushAsync(new CoursePage());
+		await Navigation.PushAsync(new CoursePage(e.Item as Course));
     }
 }

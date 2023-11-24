@@ -10,7 +10,7 @@ namespace FinalProject
         private const string TERM_API = "academicTerm/v2?numOfFutureTerms=2&numOfPastTerms=2";
         private const string IND_TERM_API = "api/academicTerm/v2/";
         private const string CRN_API = "courseSection/v3/courseSection?crn=";
-        private const string DEPARTMENT_API = "courseSection/v3/courseSection?campusCode=O&limit=20&termCode=";
+        private const string DEPARTMENT_API = "courseSection/v3/courseSection?limit=20&termCode=";
         private const string COMPOSE_API = "&compose=%2Cschedules%2Cinstructors%2CenrollmentCount";
         private HttpClient httpClient;
 
@@ -48,11 +48,14 @@ namespace FinalProject
         {
             List<Course> courseList = new List<Course>();
             CourseResponse cr;
+            string campus = Preferences.Get("campus", "o");
             Course[] result;
             var res = await httpClient.GetAsync(
             BASE_URL +
             DEPARTMENT_API +
             termCode +
+            "&campusCode=" +
+            campus +
             COMPOSE_API +
             "&course_subjectCode=" +
             departmentCode +
@@ -100,6 +103,33 @@ namespace FinalProject
 
             return (courseList, result.Length == 20);
         }
+
+        public async Task<CrnEnroll[]> GetCoursesFromCrns(int[] crns, string termCode)
+        {
+            var res = await httpClient.GetAsync(
+            BASE_URL +
+            CRN_API +
+            String.Join(',', crns) +
+            "&compose=enrollmentCount");
+            res.EnsureSuccessStatusCode();
+
+            string json_str = await res.Content.ReadAsStringAsync();
+
+            CrnResponse cr = JsonConvert.DeserializeObject<CrnResponse>(json_str);
+
+            CrnEnroll[] results = new CrnEnroll[crns.Length];
+            for (int i = 0; i < crns.Length; i++)
+            {
+                CrnEnroll crnEnroll = new CrnEnroll();
+                crnEnroll.Crn = cr.data[i].Crn;
+                crnEnroll.CurrentStudents = cr.data[i].EnrollmentCount.numberOfCurrent;
+                crnEnroll.MaxStudents = cr.data[i].EnrollmentCount.numberOfMax;
+                results[i] = crnEnroll;
+            }
+
+            return results;
+        }
+
         private Schedule[] parseSchedules(ScheduleData[] datas, int crn)
         {
             List<Schedule> schedules = new List<Schedule>();

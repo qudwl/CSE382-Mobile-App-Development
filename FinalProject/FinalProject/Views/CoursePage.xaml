@@ -3,10 +3,61 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="FinalProject.Views.CoursePage"
              Title="CoursePage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    <ScrollView>
+        <VerticalStackLayout Margin="10" Spacing="20" >
+            <Grid RowSpacing="10" ColumnSpacing="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label x:Name="title" Grid.Row="0" Grid.Column="0" />
+                <Label x:Name="courseId" VerticalOptions="CenterAndExpand" FontSize="36" FontAttributes="Bold" Grid.Row="1" Grid.Column="0" />
+                <Label x:Name="instructor" Grid.Row="2" Grid.Column="0" />
+                <Frame x:Name="availability" Padding="5" CornerRadius="10" Grid.Row="1" Grid.Column="1">
+                    <HorizontalStackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+                        <Label x:Name="currentRegistered" />
+                        <Label Text="/" />
+                        <Label x:Name="totalAvailable" />
+                    </HorizontalStackLayout>
+                </Frame>
+            </Grid>
+            <Label Text="Description" />
+            <Frame CornerRadius="10">
+                <Frame.Shadow>
+                    <Shadow Offset="0, 8" Radius="24" Brush="Black" Opacity="0.5" />
+                </Frame.Shadow>
+                <Label x:Name="description" />
+            </Frame>
+            <Label Text="Schedule" />
+            <Frame CornerRadius="10">
+                <ListView SelectionMode="None" x:Name="schedules">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <HorizontalStackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+                                    <Label Text="{Binding Days}" />
+                                    <Label Text=" " />
+                                    <Label Text="{Binding StartTime}" />
+                                    <Label Text="-" />
+                                    <Label Text="{Binding EndTime}" />
+                                    <Label Text=" " />
+                                    <Label Text="{Binding BuildingName}" />
+                                </HorizontalStackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+
+                </ListView>
+            </Frame>
+            <Grid ColumnDefinitions="*, *" ColumnSpacing="10">
+                <Button Grid.Column="0" Text="Copy CRN" x:Name="copyBtn" Pressed="copyBtn_Pressed" />
+                <Button Grid.Column="1" Text="Delete" x:Name="deleteBtn" Pressed="deleteBtn_Pressed" BackgroundColor="Red" FontAttributes="Bold" />
+            </Grid>
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

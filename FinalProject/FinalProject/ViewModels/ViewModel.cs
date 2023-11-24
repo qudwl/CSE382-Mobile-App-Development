@@ -22,11 +22,11 @@ namespace FinalProject.ViewModels
             Courses = new ObservableCollection<Course>();
             Terms = new ObservableCollection<Term>();
             api = new API();
-            RefreshCourses();
             SetTerms();
             Campus = Preferences.Get("campus", "o");
             DeleteAllCommand = new Command(DeleteAll);
             RefreshPage = new Command(RefreshCourses);
+            RefreshCourses();
         }
 
         protected virtual void OnPropertyChanged(string propertyName)
@@ -42,7 +42,7 @@ namespace FinalProject.ViewModels
                 if (selectedTerm != value)
                 {
                     selectedTerm = value;
-                    Preferences.Set("termId", selectedTerm.id);
+                    Preferences.Set("termCode", selectedTerm.id);
                     Console.WriteLine("Term changed to " + selectedTerm.label);
                     Courses.Clear();
                     OnPropertyChanged("SelectedTerm");
@@ -64,7 +64,7 @@ namespace FinalProject.ViewModels
             }
         }
 
-        private void RefreshCourses()
+        public void RefreshCourses()
         {
             Courses.Clear();
             var tempList = DB.conn.Table<Course>().ToList();
