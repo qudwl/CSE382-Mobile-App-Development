@@ -16,6 +16,8 @@ namespace FinalProject.Models
         [JsonProperty("creditHoursHigh")]
         public double CreditHour { get; set; }
         public bool IsDisplayed { get; set; }
+        public string TermDescription { get; set; }
+        public string CampusName { get; set; }
         public string CourseSectionStatusCode { get; set; }
         public EnrollCount EnrollmentCount { get; set; }
         public CourseData Course { get; set; }

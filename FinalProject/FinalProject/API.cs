@@ -88,18 +88,14 @@ namespace FinalProject
                     data.EnrollmentCount.numberOfMax,
                     data.EnrollmentCount.numberOfCurrent,
                     data.SectionName,
+                    data.TermDescription,
+                    data.CampusName,
                     schedules
                     );
                 if (data.IsDisplayed && data.CourseSectionStatusCode == "A")
                 {
                     courseList.Add(result[i]);
-                    Console.WriteLine("Section Active");
                 }
-                else
-                {
-                    Console.WriteLine($"{data.IsDisplayed} {data.CourseSectionStatusCode}");
-                }
-                Console.WriteLine(data.Course.SubjectCode + data.Course.Number);
             }
 
             return (courseList, result.Length == 20);

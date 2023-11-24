@@ -12,12 +12,13 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Label Grid.Row="1" Text="Saved Classes" />
-        <ListView Grid.Row="2" x:Name="courseList" ItemsSource="{Binding Courses}">
+        <ListView Grid.Row="2" x:Name="courseList" ItemsSource="{Binding Courses}" HasUnevenRows="True" ItemTapped="courseList_ItemTapped">
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="local:Course">
-                    <ViewCell>
-                        <Grid RowSpacing="5">
+                    <ViewCell Height="100">
+                        <Grid HeightRequest="100" RowSpacing="5">
                             <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
                                 <RowDefinition Height="*" />
                                 <RowDefinition Height="*" />
                             </Grid.RowDefinitions>
@@ -32,14 +33,16 @@
                                 <Label Text="/" />
                                 <Label Text="{Binding MaxStudents}" />
                             </HorizontalStackLayout>
-                            <Label Grid.Row="1" Grid.Column="1" Text="{Binding Times}" />
+                            <Label Text="{Binding Times}" Grid.Row="1" Grid.Column="1" />
+                            <Label Text="{Binding TermDescription}" Grid.Row="2" Grid.Column="0" />
+                            <Label Text="{Binding CampusName}" Grid.Row="2" Grid.Column="1" />
                         </Grid>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <HorizontalStackLayout Grid.Row="3" HorizontalOptions="Center">
-            <Button Text="Refresh" x:Name="refreshBtn" />
+        <HorizontalStackLayout Grid.Row="3" HorizontalOptions="Center" Spacing="10" >
+            <Button Text="Refresh" x:Name="refreshBtn" Command="{Binding RefreshPage}" />
             <Button Text="Delete All" x:Name="deleteAllBtn" Command="{Binding DeleteAllCommand}" />
         </HorizontalStackLayout>
     </Grid>

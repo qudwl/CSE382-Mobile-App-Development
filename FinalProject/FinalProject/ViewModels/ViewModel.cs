@@ -15,21 +15,18 @@ namespace FinalProject.ViewModels
         public ICommand RefreshPage { get; }
         public ICommand DeleteAllCommand { get; }
         private Term selectedTerm;
+        private string campus;
 
         public ViewModel()
         {
             Courses = new ObservableCollection<Course>();
             Terms = new ObservableCollection<Term>();
             api = new API();
-            var tempList = DB.conn.Table<Course>().ToList();
-            foreach (var course in tempList)
-            {
-                course.Schedules = DB.conn.Table<Schedule>().Where(s => s.Crn == course.Crn).ToArray();
-                Courses.Add(course);
-            }
+            RefreshCourses();
             SetTerms();
-            
+            Campus = Preferences.Get("campus", "o");
             DeleteAllCommand = new Command(DeleteAll);
+            RefreshPage = new Command(RefreshCourses);
         }
 
         protected virtual void OnPropertyChanged(string propertyName)
@@ -45,15 +42,37 @@ namespace FinalProject.ViewModels
                 if (selectedTerm != value)
                 {
                     selectedTerm = value;
+                    Preferences.Set("termId", selectedTerm.id);
                     Console.WriteLine("Term changed to " + selectedTerm.label);
+                    Courses.Clear();
                     OnPropertyChanged("SelectedTerm");
+                }
+            }
+        }
+
+        public string Campus
+        {
+            get { return campus; }
+            set
+            {
+                if (value != campus)
+                {
+                    campus = value;
+                    Preferences.Set("campus", campus);
+                    OnPropertyChanged("Campus");
                 }
             }
         }
 
         private void RefreshCourses()
         {
-
+            Courses.Clear();
+            var tempList = DB.conn.Table<Course>().ToList();
+            foreach (var course in tempList)
+            {
+                course.Schedules = DB.conn.Table<Schedule>().Where(s => s.Crn == course.Crn).ToArray();
+                Courses.Add(course);
+            }
         }
 
         private void DeleteAll()

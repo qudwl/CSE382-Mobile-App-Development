@@ -11,7 +11,7 @@ public partial class App : Application
 
 		DB.OpenConnection();
 		if (!Preferences.ContainsKey("campus"))
-			Preferences.Set("campus", "Oxford");
+			Preferences.Set("campus", "o");
 		ViewModel = new ViewModel();
 		MainPage = new AppShell();
 	}

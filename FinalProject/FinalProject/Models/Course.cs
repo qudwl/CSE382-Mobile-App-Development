@@ -14,6 +14,8 @@ namespace FinalProject.Models
         public string Section { get; set; }
         public string Instructor { get; set; }
         public string Description { get; set; }
+		public string TermDescription { get; set; }
+		public string CampusName { get; set; }
         public double Credits { get; set; }
         public int MaxStudents { get; set; }
         public int CurrentStudents { get; set; }
@@ -33,6 +35,8 @@ namespace FinalProject.Models
 			int maxStudents,
 			int currentStudents,
 			string sectionName,
+			string termDescription,
+			string campusName,
 			Schedule[] schedules)
 		{
 			this.Subject = subject;
@@ -47,6 +51,8 @@ namespace FinalProject.Models
 			this.CurrentStudents = currentStudents;
             this.Schedules = schedules;
 			this.SectionName = sectionName;
+			this.TermDescription = termDescription;
+			this.CampusName = campusName;
 		}
 
         public override string ToString()

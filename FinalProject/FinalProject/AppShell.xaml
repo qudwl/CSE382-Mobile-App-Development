@@ -7,13 +7,13 @@
     Shell.FlyoutBehavior="Disabled"
     Shell.NavBarIsVisible="False">
     <TabBar>
-        <Tab Title="Home">
+        <Tab Title="Home" Icon="home_icon.png">
             <ShellContent ContentTemplate="{DataTemplate views:MainPage}" />
         </Tab>
-        <Tab Title="Search">
+        <Tab Title="Search" Icon="search_icon.png">
             <ShellContent ContentTemplate="{DataTemplate views:SearchPage}" />
         </Tab>
-        <Tab Title="Settings">
+        <Tab Title="Settings" Icon="settings_icon.png">
             <ShellContent ContentTemplate="{DataTemplate views:SettingsPage}" />
         </Tab>
     </TabBar>
