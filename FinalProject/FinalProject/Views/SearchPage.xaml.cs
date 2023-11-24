@@ -183,26 +183,26 @@ public partial class SearchPage : ContentPage
     async void searchList_ItemTapped(System.Object sender, Microsoft.Maui.Controls.ItemTappedEventArgs e)
     {
         Course course = (e.Item as Course);
-        Console.WriteLine(DB.conn.Table<Course>().First(item => item.Crn == course.Crn));
-        //if ( == null)
-        //{
-        //    string message = "Would you like to add " + course.SectionName + "?";
-        //    var addCourseAnswer = await DisplayAlert("Add Course to Favorites", message, "Yes", "No");
+        var savedClasses = DB.conn.Table<Course>();
+        if (savedClasses.Count() == 0 || !savedClasses.Contains(course))
+        {
+            string message = "Would you like to add " + course.SectionName + "?";
+            var addCourseAnswer = await DisplayAlert("Add Course to Favorites", message, "Yes", "No");
 
-        //    if (addCourseAnswer)
-        //    {
-        //        DB.conn.Insert(course);
-        //        foreach (var schedule in course.Schedules)
-        //        {
-        //            DB.conn.Insert(schedule);
-        //        }
-        //        App.ViewModel.Courses.Add(course);
-        //    }
+            if (addCourseAnswer)
+            {
+                DB.conn.Insert(course);
+                foreach (var schedule in course.Schedules)
+                {
+                    DB.conn.Insert(schedule);
+                }
+                App.ViewModel.Courses.Add(course);
+            }
 
-        //    else
-        //    {
-        //        searchList.SelectedItem = null;
-        //    }
-        //}
+            else
+            {
+                searchList.SelectedItem = null;
+            }
+        }
     }
 }

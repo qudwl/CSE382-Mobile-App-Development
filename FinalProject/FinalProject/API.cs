@@ -8,6 +8,7 @@ namespace FinalProject
     {
         private const string BASE_URL = "https://ws.apps.miamioh.edu/api/";
         private const string TERM_API = "academicTerm/v2?numOfFutureTerms=2&numOfPastTerms=2";
+        private const string IND_TERM_API = "api/academicTerm/v2/";
         private const string CRN_API = "courseSection/v3/courseSection?crn=";
         private const string DEPARTMENT_API = "courseSection/v3/courseSection?campusCode=O&limit=20&termCode=";
         private const string COMPOSE_API = "&compose=%2Cschedules%2Cinstructors%2CenrollmentCount";
@@ -29,6 +30,20 @@ namespace FinalProject
 
             return tr!.terms;
         }
+
+        public async Task<Term> GetTerm(int termId)
+        {
+            var res = await httpClient.GetAsync(BASE_URL + IND_TERM_API + termId.ToString());
+            res.EnsureSuccessStatusCode();
+
+            string result = await res.Content.ReadAsStringAsync();
+
+            IndividualTermResponse itr = JsonConvert.DeserializeObject<IndividualTermResponse>(result);
+
+            return itr!.term;
+        }
+
+
         public async Task<(List<Course>, bool)> GetCourseByDepartment(string departmentCode, string termCode, int offset)
         {
             List<Course> courseList = new List<Course>();
@@ -42,7 +57,7 @@ namespace FinalProject
             "&course_subjectCode=" +
             departmentCode +
             (offset > 0 ? "&offset=" +
-            (offset * 20).ToString() : ""));
+            (offset * 20 + 1).ToString() : ""));
             res.EnsureSuccessStatusCode();
 
             string json_str = await res.Content.ReadAsStringAsync();

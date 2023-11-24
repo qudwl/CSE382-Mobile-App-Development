@@ -6,7 +6,7 @@
              Title="SettingsPage">
     <VerticalStackLayout Spacing="10" Margin="10">
         <Label Text="Change Term" />
-        <Picker x:Name="termPicker" />
+        <Picker x:Name="termPicker" ItemsSource="{Binding Terms}" SelectedItem="{Binding SelectedTerm}" />
         <Label Text="Campus" />
         <VerticalStackLayout RadioButtonGroup.GroupName="campusRadioGroup" RadioButtonGroup.SelectedValue="o">
             <RadioButton Content="Oxford" Value="o" />
