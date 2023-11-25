@@ -22,7 +22,6 @@ namespace FinalProject.ViewModels
             Courses = new ObservableCollection<Course>();
             Terms = new ObservableCollection<Term>();
             api = new API();
-            SetTerms();
             Campus = Preferences.Get("campus", "o");
             DeleteAllCommand = new Command(DeleteAll);
             RefreshPage = new Command(RefreshCourses);
@@ -68,11 +67,15 @@ namespace FinalProject.ViewModels
         {
             Courses.Clear();
             var tempList = DB.conn.Table<Course>().ToList();
+            List<int> crns = new List<int>();
             foreach (var course in tempList)
             {
                 course.Schedules = DB.conn.Table<Schedule>().Where(s => s.Crn == course.Crn).ToArray();
                 Courses.Add(course);
+                crns.Add(course.Crn);
             }
+
+
         }
 
         private void DeleteAll()

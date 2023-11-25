@@ -17,6 +17,7 @@ public partial class CoursePage : ContentPage
 		totalAvailable.Text = course.MaxStudents.ToString();
 		instructor.Text = course.Instructor;
 		schedules.ItemsSource = course.Schedules;
+		departmentImage.Source = course.Subject.ToLower() + ".png";
 		if (course.CurrentStudents < course.MaxStudents)
 		{
 			availability.BackgroundColor = Color.Parse("lightgreen");

@@ -15,7 +15,8 @@
                     <ColumnDefinition Width="3*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <Label x:Name="title" Grid.Row="0" Grid.Column="0" />
+                <Label x:Name="title" Grid.Row="0" Grid.Column="0" VerticalOptions="CenterAndExpand" />
+                <Image MaximumHeightRequest="20" x:Name="departmentImage" Grid.Row="0" Grid.Column="1" />
                 <Label x:Name="courseId" VerticalOptions="CenterAndExpand" FontSize="36" FontAttributes="Bold" Grid.Row="1" Grid.Column="0" />
                 <Label x:Name="instructor" Grid.Row="2" Grid.Column="0" />
                 <Frame x:Name="availability" Padding="5" CornerRadius="10" Grid.Row="1" Grid.Column="1">

@@ -12,11 +12,11 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Label Grid.Row="1" Text="Saved Classes" />
-        <ListView Grid.Row="2" x:Name="courseList" ItemsSource="{Binding Courses}" HasUnevenRows="True" ItemTapped="courseList_ItemTapped">
+        <ListView Grid.Row="2" x:Name="courseList" ItemsSource="{Binding Courses}" SelectionMode="None" HasUnevenRows="True" ItemTapped="courseList_ItemTapped">
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="local:Course">
-                    <ViewCell Height="100">
-                        <Grid HeightRequest="100" RowSpacing="5">
+                    <ViewCell>
+                        <Grid RowSpacing="5">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="*" />
                                 <RowDefinition Height="*" />
