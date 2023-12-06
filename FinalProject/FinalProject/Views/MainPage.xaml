@@ -4,46 +4,45 @@
              xmlns:local="clr-namespace:FinalProject.Models;assembly=FinalProject"
              x:Class="FinalProject.Views.MainPage"
              Title="MainPage">
-    <Grid Margin="10" RowSpacing="10">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="9*" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <Label Grid.Row="1" Text="Saved Classes" />
-        <ListView Grid.Row="2" x:Name="courseList" ItemsSource="{Binding Courses}" SelectionMode="None" HasUnevenRows="True" ItemTapped="courseList_ItemTapped">
+    <Grid Margin="10" RowDefinitions="auto, *" RowSpacing="10">
+        <FlexLayout Grid.Row="0" Direction="Row" JustifyContent="SpaceBetween">
+            <Label Text="Saved Classes" VerticalOptions="CenterAndExpand" FontSize="Medium" FontAttributes="Bold" HorizontalOptions="Start" />
+            <HorizontalStackLayout HorizontalOptions="End" Spacing="10">
+                <Border StrokeShape="RoundRectangle 10" BackgroundColor="White" Padding="5">
+                <ImageButton Source="refresh.png" Command="{Binding RefreshPage}" HeightRequest="25" />
+                </Border>
+                <Border StrokeShape="RoundRectangle 10" BackgroundColor="White" Padding="5">
+                <ImageButton Source="delete.png" Command="{Binding DeleteAllCommand}" HeightRequest="25" />
+                </Border>
+            </HorizontalStackLayout>
+        </FlexLayout>
+        <ListView x:Name="courseList" Grid.Row="1" SeparatorVisibility="None" ItemsSource="{Binding Courses}" SelectionMode="None" HasUnevenRows="True" ItemTapped="courseList_ItemTapped">
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="local:Course">
                     <ViewCell>
-                        <Grid RowSpacing="5">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="*" />
-                                <RowDefinition Height="*" />
-                                <RowDefinition Height="*" />
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <Label Grid.Row="0" Grid.Column="0" FontSize="Medium" Text="{Binding SectionName}" />
-                            <Label Grid.Row="1" Grid.Column="0" Text="{Binding Title}" />
-                            <HorizontalStackLayout Grid.Row="0" Grid.Column="1">
-                                <Label Text="{Binding CurrentStudents}" />
-                                <Label Text="/" />
-                                <Label Text="{Binding MaxStudents}" />
-                            </HorizontalStackLayout>
-                            <Label Text="{Binding Times}" Grid.Row="1" Grid.Column="1" />
-                            <Label Text="{Binding TermDescription}" Grid.Row="2" Grid.Column="0" />
-                            <Label Text="{Binding CampusName}" Grid.Row="2" Grid.Column="1" />
-                        </Grid>
+                        <StackLayout Margin="10">
+                        <Border Padding="20" StrokeShape="RoundRectangle 20">
+                            <VerticalStackLayout>
+                                    <FlexLayout Direction="Row" JustifyContent="SpaceBetween">
+                                        <Label FontSize="Large" FontAttributes="Bold" Text="{Binding SectionName}" />
+                                        <HorizontalStackLayout>
+                                            <Label VerticalTextAlignment="Center" Text="{Binding CurrentStudents}" />
+                                            <Label VerticalTextAlignment="Center" Text="/" />
+                                            <Label VerticalTextAlignment="Center" Text="{Binding MaxStudents}" />
+                                        </HorizontalStackLayout>
+                                    </FlexLayout>
+                                    <Label Grid.Row="1" Grid.Column="0" Text="{Binding Title}" />
+                                    <FlexLayout Direction="Row" JustifyContent="SpaceBetween">
+                                        <Label Text="{Binding TermDescription}" />
+                                        <Label Text="{Binding CampusName}" />
+                                    </FlexLayout>
+                                    <Label Text="{Binding Times}" VerticalOptions="Center" />
+                                </VerticalStackLayout>
+                        </Border>
+                        </StackLayout>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <HorizontalStackLayout Grid.Row="3" HorizontalOptions="Center" Spacing="10" >
-            <Button Text="Refresh" x:Name="refreshBtn" Command="{Binding RefreshPage}" />
-            <Button Text="Delete All" x:Name="deleteAllBtn" Command="{Binding DeleteAllCommand}" />
-        </HorizontalStackLayout>
     </Grid>
 </ContentPage>

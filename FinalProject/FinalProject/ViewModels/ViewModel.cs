@@ -26,6 +26,7 @@ namespace FinalProject.ViewModels
             DeleteAllCommand = new Command(DeleteAll);
             RefreshPage = new Command(RefreshCourses);
             RefreshCourses();
+            SetTerms();
         }
 
         protected virtual void OnPropertyChanged(string propertyName)

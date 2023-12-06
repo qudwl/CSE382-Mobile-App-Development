@@ -150,7 +150,7 @@ public partial class SearchPage : ContentPage
     {
         Courses.Clear();
         int index = departmentPicker.SelectedIndex;
-        string termCode = Preferences.Get("termCode", "202310");
+        int termCode = Preferences.Get("termId", 202310);
         isLoading = true;
         offset = 0;
         var (results, doesItHaveMore) = await api.GetCourseByDepartment(Departments[index].Value, termCode, offset);
@@ -168,7 +168,7 @@ public partial class SearchPage : ContentPage
         {
             isLoading = true;
             int index = departmentPicker.SelectedIndex;
-            string termCode = Preferences.Get("termCode", "202310");
+            int termCode = Preferences.Get("termCode", 202310);
             offset++;
             var (results, doesItHaveMore) = await api.GetCourseByDepartment(Departments[index].Value, termCode, offset);
             foreach(var course in results)

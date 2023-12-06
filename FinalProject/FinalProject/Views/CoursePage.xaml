@@ -28,33 +28,25 @@
                 </Frame>
             </Grid>
             <Label Text="Description" />
-            <Frame CornerRadius="10">
-                <Frame.Shadow>
-                    <Shadow Offset="0, 8" Radius="24" Brush="Black" Opacity="0.5" />
-                </Frame.Shadow>
-                <Label x:Name="description" />
-            </Frame>
+            <Label x:Name="description" />
             <Label Text="Schedule" />
-            <Frame CornerRadius="10">
-                <ListView SelectionMode="None" x:Name="schedules">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <ViewCell>
-                                <HorizontalStackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
-                                    <Label Text="{Binding Days}" />
-                                    <Label Text=" " />
-                                    <Label Text="{Binding StartTime}" />
-                                    <Label Text="-" />
-                                    <Label Text="{Binding EndTime}" />
-                                    <Label Text=" " />
-                                    <Label Text="{Binding BuildingName}" />
-                                </HorizontalStackLayout>
-                            </ViewCell>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-
-                </ListView>
-            </Frame>
+            <ListView SelectionMode="None" x:Name="schedules">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <HorizontalStackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+                                <Label Text="{Binding Days}" />
+                                <Label Text=" " />
+                                <Label Text="{Binding StartTime}" />
+                                <Label Text="-" />
+                                <Label Text="{Binding EndTime}" />
+                                <Label Text=" " />
+                                <Label Text="{Binding BuildingName}" />
+                            </HorizontalStackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
             <Grid ColumnDefinitions="*, *" ColumnSpacing="10">
                 <Button Grid.Column="0" Text="Copy CRN" x:Name="copyBtn" Pressed="copyBtn_Pressed" />
                 <Button Grid.Column="1" Text="Delete" x:Name="deleteBtn" Pressed="deleteBtn_Pressed" BackgroundColor="Red" FontAttributes="Bold" />

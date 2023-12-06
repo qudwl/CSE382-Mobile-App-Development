@@ -61,6 +61,8 @@
 
 	<ItemGroup>
 	  <None Remove="Models\" />
+	  <None Remove="Resources\Images\delete.svg" />
+	  <None Remove="Resources\Images\refresh.svg" />
 	  <None Remove="Views\" />
 	  <None Remove="ViewModels\" />
 	  <None Remove="Resources\Images\arb.svg" />

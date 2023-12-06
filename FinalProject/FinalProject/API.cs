@@ -44,7 +44,7 @@ namespace FinalProject
         }
 
 
-        public async Task<(List<Course>, bool)> GetCourseByDepartment(string departmentCode, string termCode, int offset)
+        public async Task<(List<Course>, bool)> GetCourseByDepartment(string departmentCode, int termCode, int offset)
         {
             List<Course> courseList = new List<Course>();
             CourseResponse cr;
